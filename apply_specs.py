@@ -24,7 +24,7 @@ if specs == []:
     for f in glob.glob("*.yaml"):
         specs.append(f)
     for f in glob.glob("*.yml"):
-        if f != "escape.yml":
+        if f not in ["escape.yml", "circle.yml"]:
             specs.append(f)
 
 
