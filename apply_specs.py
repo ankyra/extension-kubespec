@@ -5,6 +5,11 @@ import sys
 import json
 import glob
 import subprocess
+import urllib
+sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
+sys.stderr = os.fdopen(sys.stderr.fileno(), 'w', 0)
+sys.path = ["deps/_/stdlib/"] + sys.path
+from escape import path
 
 env = os.environ
 
@@ -27,12 +32,22 @@ if specs == []:
         if f not in ["escape.yml", "circle.yml"]:
             specs.append(f)
 
+kubectl_path = "kubectl"
+
+if path.is_binary_on_path("kubectl"):
+    print "kubectl binary is not on PATH"
+    url = "https://storage.googleapis.com/kubernetes-release/release/v1.6.4/bin/linux/amd64/kubectl"
+    print "Downloading kubectl from", url
+    urllib.urlretrieve(url, "kubectl")
+    os.chmod("kubectl", 0755)
+    kubectl_path = os.path.realpath("./kubectl")
+
 
 for spec in specs:
     print "Deploying Kubernetes spec", spec
     print
     sys.stdout.flush()
-    cmd = ["kubectl", "--kubeconfig", kubecfg_path, "apply", "-f", spec]
+    cmd = [kubectl_path, "--kubeconfig", kubecfg_path, "apply", "-f", spec]
     try:
         subprocess.check_output(cmd)
     except subprocess.CalledProcessError, e:
