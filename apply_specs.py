@@ -34,13 +34,15 @@ if specs == []:
 
 kubectl_path = "kubectl"
 
-if path.is_binary_on_path("kubectl"):
+if not path.is_binary_on_path("kubectl"):
     print "kubectl binary is not on PATH"
     url = "https://storage.googleapis.com/kubernetes-release/release/v1.6.4/bin/linux/amd64/kubectl"
     print "Downloading kubectl from", url
     urllib.urlretrieve(url, "kubectl")
     os.chmod("kubectl", 0755)
     kubectl_path = os.path.realpath("./kubectl")
+else:
+    print "Found kubectl binary on path. Skipping download"
 
 
 for spec in specs:
