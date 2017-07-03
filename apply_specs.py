@@ -41,6 +41,7 @@ if not path.is_binary_on_path("kubectl"):
     urllib.urlretrieve(url, "kubectl")
     os.chmod("kubectl", 0755)
     kubectl_path = os.path.realpath("./kubectl")
+    path.add_binary_to_path(kubectl_path)
 else:
     print "Found kubectl binary on path. Skipping download"
 
