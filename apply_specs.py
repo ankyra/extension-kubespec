@@ -6,8 +6,6 @@ import json
 import glob
 import subprocess
 import urllib
-sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
-sys.stderr = os.fdopen(sys.stderr.fileno(), 'w', 0)
 sys.path = ["deps/_/stdlib/"] + sys.path
 from escape import path
 
