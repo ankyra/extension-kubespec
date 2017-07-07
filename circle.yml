@@ -1,25 +1,12 @@
-machine:
-  services:
-  - docker
-  environment:
-    ESCAPE_PROJECT: "_"
-    ESCAPE_STORAGE_BACKEND: "escape"
-    ESCAPE_API_SERVER: "https://registry.ankyra.io"
-
 dependencies:
-  pre:
-  - pip install PyYAML==3.12
-  - curl https://storage.googleapis.com/escape-releases-eu/escape-v0.10.14.tgz > escape.tgz
-  - rm -rf escape && tar -xvzf escape.tgz
-  - mv escape /home/ubuntu/bin
-  - escape version
-  - "escape state create --deploy -v kubernetes_kubectl='{\"project_id\": \"lol\"}:' kubernetes-provider-latest"
-  - escape deploy kubernetes-provider-latest -d '_/kubernetes-provider'
+  override:
+  - curl https://storage.googleapis.com/escape-releases-eu/escape-v0.12.5.tgz > /home/ubuntu/bin/escape.tgz
+  - tar -C /home/ubuntu/bin -xvzf /home/ubuntu/bin/escape.tgz
+
+  - escape deploy kubernetes-provider-latest -v 'kubernetes_kubectl={"project_id": "lol"}:'
 
 compile:
   override:
-  - escape state create 
-  - escape state create --deploy
   - escape release
 
 test:
