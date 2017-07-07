@@ -3,7 +3,7 @@ dependencies:
   - curl https://storage.googleapis.com/escape-releases-eu/escape-v0.12.5.tgz > /home/ubuntu/bin/escape.tgz
   - tar -C /home/ubuntu/bin -xvzf /home/ubuntu/bin/escape.tgz
 
-  - escape deploy kubernetes-provider-latest -v 'kubernetes_kubectl={"project_id": "lol"}:'
+  - "escape deploy -v kubernetes_kubectl={\"project_id\": \"lol\"} kubernetes-provider-latest"
 
 compile:
   override:
