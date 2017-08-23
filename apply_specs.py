@@ -13,6 +13,7 @@ env = os.environ
 
 kubecfg_path = env['INPUT_kubecfg_path']
 specs = env['INPUT_kube_spec_files']
+kubectl_version = env['INPUT_METADATA_kubectl_version']
 specs = "[]" if specs == "" else specs
 
 try:
@@ -34,7 +35,8 @@ kubectl_path = "kubectl"
 
 if not path.is_binary_on_path("kubectl"):
     print "kubectl binary is not on PATH"
-    url = "https://storage.googleapis.com/kubernetes-release/release/v1.6.4/bin/linux/amd64/kubectl"
+    url = "https://storage.googleapis.com/kubernetes-release/release/v" 
+    url += kubectl_version + "/bin/linux/amd64/kubectl"
     print "Downloading kubectl from", url
     urllib.urlretrieve(url, "kubectl")
     os.chmod("kubectl", 0755)

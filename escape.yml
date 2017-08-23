@@ -24,7 +24,7 @@ description: >
     A release to work with Kubernetes spec files. This release consumes a
     Kubernetes cluster and uses kubectl to deploy and destroy the spec files.
 
-logo: ""
+logo: logo.png
 
 extends: []
 
@@ -128,7 +128,8 @@ outputs: []
 #     author: Fictional Character
 #     co_author: $dependency.metadata.author
 #
-metadata: {}
+metadata:
+    kubectl_version: "1.6.4"
 
 # The files to includes in this release. The files don't have to exist at 
 # build time. Globbing patterns are supported.
