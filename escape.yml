@@ -1,5 +1,5 @@
 name: extension-kubespec
-version: 0.2.@
+version: 0.3.@
 description: |
   A release to work with Kubernetes spec files. This release consumes a
   Kubernetes cluster and uses kubectl to deploy and destroy the spec files.
@@ -9,30 +9,26 @@ logo: logo.png
 depends:
 - stdlib-latest
 
-consumes:
-- name: kubernetes
-  scopes:
-  - deploy
+deploy_consumes:
+- kubernetes
 
-inputs:
+deploy_inputs:
 - id: kubecfg_path
+  friendly: Kubernetes Configuration File path
   default: $kubernetes.outputs.kubernetes_kubectl.file
+  sensitive: true
+  visible: false
+  type: string
   description: |
     The path to the Kubernetes Configuration file (e.g. ~/.kube/config)
-  friendly: Kubernetes Configuration File path
-  scopes: [deploy]
-  sensitive: true
-  type: string
-  visible: false
 
 - id: kube_spec_files
+  friendly: Kubernetes Spec Files
   default: []
+  type: list[string]
   description: |
     A list of Kubernetes spec files. If left empty then all YAML files in  the
     current directory will be submitted.
-  friendly: Kubernetes Spec Files
-  scopes: [deploy]
-  type: list[string]
 
 metadata:
   kubectl_version: 1.6.4
