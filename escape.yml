@@ -31,6 +31,6 @@ deploy_inputs:
     current directory will be submitted.
 
 metadata:
-  kubectl_version: 1.6.4
+  kubectl_version: 1.7.5
 
 deploy: apply_specs.py
