@@ -10,4 +10,4 @@ jobs:
     - run: 
         name: Build Escape release
         command: |
-          escape release --skip-deploy
+          escape run release --skip-deploy
