@@ -10,12 +10,13 @@ depends:
 - stdlib-latest
 
 deploy_consumes:
-- kubernetes
+- kubernetes as k8s
+- kubernetes as k8s2
 
 deploy_inputs:
 - id: kubecfg_path
   friendly: Kubernetes Configuration File path
-  default: $kubernetes.outputs.kubernetes_kubectl.file
+  default: $k8s.outputs.kubernetes_kubectl.file
   sensitive: true
   visible: false
   type: string
