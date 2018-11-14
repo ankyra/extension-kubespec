@@ -1,0 +1,22 @@
+name: kubernetes-namespace
+version: 0.3.@
+description: |
+  Define Kubernetes namespaces.
+
+logo: logo.png
+
+extends:
+- extension-kubespec-latest
+
+deploy_inputs:
+- id: namespace
+  friendly: Kubernetes Namespace
+  description: The Kubernetes Namespace to define.
+  default: "default"
+- id: kube_spec_files
+  visible: false
+  default:
+  - namespace.yml
+
+deploy_templates:
+- file: namespace.yml.tpl
