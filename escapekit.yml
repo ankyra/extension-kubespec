@@ -1,0 +1,17 @@
+escapekit_version: 1
+build:
+  steps:
+  - escape_plan_location: escape.yml
+    skip_tests: true
+    skip_deploy: true
+    skip_build: true
+    skip_destroy: true
+  - escape_plan_location: escape-k8s-namespace.yml
+    build_on_file_changes:
+    - escape-k8s-namespace.yml
+    - namespace.yml.tpl
+    skip_tests: true
+    skip_deploy: true
+    skip_build: true
+    skip_destroy: true
+    skip_if_exists: true
